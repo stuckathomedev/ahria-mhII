@@ -31,25 +31,29 @@ def length_ok(text):
 
 
 class Tweeter:
-    def __init__(self, twitter_keys):
+    def __init__(self, twitter_keys, indicoio_api_key):
         auth = tweepy.OAuthHandler(
-            twitter_keys.consumer_key,
-            twitter_keys.consumer_secret)
-        auth.set_access_token(twitter_keys.access_key, twitter_keys.access_secret)
+            twitter_keys["consumer_key"],
+            twitter_keys["consumer_secret"])
+        auth.set_access_token(twitter_keys["access_key"], twitter_keys["access_secret"])
         self.api = tweepy.API(auth)
+
+        indicoio.config.api_key = indicoio_api_key
 
     def tweet(self, text):
         analysis = indicoio.analyze_text(
             text,
             apis=['sentiment_hq', 'political', 'twitter_engagement'])
 
+        print(analysis)
+
         if (ask_for_approval(
-                    analysis.sentiment_hq,
+                    analysis["sentiment_hq"],
                     "Woohoo! Let's go.",
                     "That seems a little negative. Want to reword?",
                     "That seems pretty negative. Want to reword it?") and
                 ask_for_approval(
-                    analysis.twitter_engagement,
+                    analysis["twitter_engagement"],
                     "I suspect that this one'll be pretty popular.",
                     "I'm not sure if this'll appeal to many people. Want to reword it?",
                     "I think this one will be unpopular. Want to reword it?") and
