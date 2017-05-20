@@ -1,0 +1,9 @@
+[Unit]
+Description=Ahria AI
+
+[Service]
+Type=idle
+ExecStart=/usr/bin/python3 /home/pi/ahria/__init__.py
+
+[Install]
+WantedBy=multi-user.target
