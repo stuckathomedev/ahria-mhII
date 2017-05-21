@@ -2,6 +2,7 @@ import cogs
 from datetime import datetime
 from threading import Timer
 
+rem_desc = ""
 
 def return_second_today(hour : int, minute: int):
     x = datetime.today()
@@ -18,12 +19,14 @@ def manager_timer(seconds : int):
 
 
 def times_up():
-    print("You have an event soon!: ")
+    print("You have an event soon!: " + rem_desc)
 
 
-def manager_today(hour : int, minute : int):
+def manager_today(hour : int, minute : int, desc : str):
     total_seconds = return_second_today(hour, minute)
+    global rem_desc
+    rem_desc = desc
     manager_timer(total_seconds)
 
 
-manager_today(2, 46)
+manager_today(3, 43, "Kill Kunal")
