@@ -119,7 +119,7 @@ class HotwordDetector(object):
               interrupt_check=lambda: False,
               sleep_time=0.03):
         """
-        Start the voice detector. For every `sleep_time` second it checks the
+        Start the tts detector. For every `sleep_time` second it checks the
         audio buffer for triggering keywords. If detected, then call
         corresponding function in `detected_callback`, which can be a single
         function (single model) or a list of callback functions (multiple
@@ -135,7 +135,7 @@ class HotwordDetector(object):
         :return: None
         """
         if interrupt_check():
-            logger.debug("detect voice return")
+            logger.debug("detect tts return")
             return
 
         tc = type(detected_callback)
@@ -152,7 +152,7 @@ class HotwordDetector(object):
 
         while True:
             if interrupt_check():
-                logger.debug("detect voice break")
+                logger.debug("detect tts break")
                 break
             data = self.ring_buffer.get()
             if len(data) == 0:
