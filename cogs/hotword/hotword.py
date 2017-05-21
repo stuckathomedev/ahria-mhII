@@ -12,6 +12,7 @@ def listen_forever(text_callback):
     def callback():
         nonlocal detector
         detector.terminate()
+        print('"Ahria" spoken.')
         tts.speak("Hi! I'm Ahria.")
         with sr.Microphone() as source:
             audio = r.listen(source, timeout=5.0)
@@ -19,7 +20,7 @@ def listen_forever(text_callback):
             try:
                 text_callback(r.recognize_google(audio))
             except sr.UnknownValueError:
-                print("Ahria could not understand audio")
+                tts.speak("Sorry, I didn't get that.")
             except sr.RequestError as e:
                 print("Ahria error; {0}".format(e))
 

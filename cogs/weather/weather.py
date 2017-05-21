@@ -49,7 +49,7 @@ def send_text(phone_number, place):
 
     message = client.api.account.messages.create(to="+1" + phone_number,
                                                  from_="+19788493104 ",
-                                                 body= weather_body)
+                                                 body=weather_body)
 
 
 

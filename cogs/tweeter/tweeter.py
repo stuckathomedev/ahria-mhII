@@ -91,4 +91,5 @@ class Tweeter:
         else:
             # Tweet it!
             self.api.update_status(text)
+            tts.speak("And tweeted! Thanks.")
             return True
