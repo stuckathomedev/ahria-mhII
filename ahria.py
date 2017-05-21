@@ -30,7 +30,7 @@ def dispatch_command(text: str):
     elif text == "quit":
         tts.speak("Goodbye!")
         exit()
-    else
+    else:
         tts.speak("Sorry, I didn't understand that.")
     # elif "reminder" in text and "today" in text:
     #     m = re.search(r'([0-9])\w* for (.*)', text)
