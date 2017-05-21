@@ -9,7 +9,8 @@ with sr.Microphone() as source:
 
     print("Done.")
 
-    detector = snowboydecoder.HotwordDetector()
+    detector = snowboydecoder.HotwordDetector(
+        "resources/Ahria.pmdl", sensitivity=0.75)
 
     assistant = None
 
