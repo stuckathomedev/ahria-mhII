@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import twilio.rest
+import cogs.voice.tts as tts
 import pyowm
 from pyowm import OWM
 from twilio.rest import Client
@@ -41,7 +42,8 @@ def send_text(phone_number, place):
     weather_dict = get_weather(place)
     cur_temp, max_temp, min_temp = parse_weather(weather_dict)
 
-    weather_body = "Current Temperature: " + cur_temp + " F°. Maximum Temperature: " + max_temp + " F°. Minimum Temperature: " + min_temp + " F°."
+    weather_body = "Current Temperature: " + cur_temp + "°F. Maximum Temperature: " + max_temp + "°F. Minimum Temperature: " + min_temp + "°F."
+    tts.speak(weather_body)
 
     account_sid = "AC984fee9fe6cc06c84923b4466a0c99a6"
     auth_token = "f107dd35e35b59857bbe03917ee1f83e"
@@ -50,8 +52,7 @@ def send_text(phone_number, place):
     message = client.api.account.messages.create(to="+1" + phone_number,
                                                  from_="+19788493104 ",
                                                  body=weather_body)
-
-
+    tts.speak("Message sent.")
 
 
 
