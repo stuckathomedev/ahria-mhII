@@ -14,6 +14,15 @@ def return_second_today(hour : int, minute: int):
     return secs
 
 
+def return_second_future(day : int, hour : int, minute : int):
+    x = datetime.today()
+    y = x.replace(day=day, hour=hour, minute=minute)
+    delta_t = y - x
+
+    secs = delta_t.seconds + 1
+    return secs
+
+
 def manager_timer(seconds : int):
     t = Timer(seconds, times_up)
     t.start()
@@ -51,4 +60,15 @@ def manager_today(hour : int, minute : int, desc : str, phone_num : str):
     notification_timer(total_seconds)
 
 
+def manager_future(day : int, hour : int, minute : int, desc : str, phone_num : str):
+    total_seconds = return_second_future(day, hour, minute)
+    global rem_desc
+    rem_desc = desc
+    global phone_number
+    phone_number = phone_num
+    manager_timer(total_seconds)
+    notification_timer(total_seconds)
+
+
 manager_today(4, 18, "Kill Kunal", "9788448697")
+
