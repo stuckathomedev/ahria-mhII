@@ -26,7 +26,10 @@ def dispatch_command(text: str):
         tweeter.tweet(text.replace('tweet ', '', 1))
     elif "weather" in text:
         m = re.search('(?:weather).+?\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})', text)
-        weather.send_text(m.group(1) + m.group(2) + m.group(3), 'Boston, MA')
+        if m is not None:
+            weather.send_text(m.group(1) + m.group(2) + m.group(3), 'Boston, MA')
+        else:
+            tts.speak("Sorry, what was that you said about the weather?")
     elif text == "quit":
         tts.speak("Goodbye!")
         exit()
