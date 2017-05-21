@@ -1,5 +1,5 @@
 import cogs
-from cogs.task_manager.manager import rem_desc'
+from cogs.task_manager.manager import rem_desc
 import twilio.rest
 import pyowm
 from pyowm import OWM
