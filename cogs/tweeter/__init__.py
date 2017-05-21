@@ -1,22 +1,22 @@
 import operator
 
-import indicoio, tweepy
+import indicoio
+import tweepy
 
 
-def analyze_goodness(value, good_text, ungood_text, double_plus_ungood_text):
+def analyze_goodness(
+        value,
+        double_plus_good_text, good_text,
+        ungood_text, double_plus_ungood_text):
     if value >= 0.8:
         # FIXME: Use a voice-synthesis function
-        print(good_text)
-        return True
+        print(double_plus_good_text)
     elif 0.8 > value >= 0.4:
-        return True
+        print(good_text)
     elif 0.4 > value >= 0.2:
         print(ungood_text)
-        # TODO: Ask for modification
-        return False
     elif 0.2 > value > 0:
         print(double_plus_ungood_text)
-        return False
     else:
         raise ValueError(
             "Value not in expected range: " + value)
@@ -25,7 +25,7 @@ def analyze_goodness(value, good_text, ungood_text, double_plus_ungood_text):
 def get_political_bias(biases):
     for party, percentage in biases.items():
         print(f"{party}: {percentage}")
-    ranked_biases = sorted(biases.items(), key=operator.itemgetter(1))
+    ranked_biases = sorted(biases.items(), key=operator.itemgetter(1), reverse=True)
     # [0]: first tuple in sorted list (with highest percentage)
     highest_bias = ranked_biases[0]
     print(f"Highest bias: {highest_bias}")
@@ -69,11 +69,13 @@ class Tweeter:
         analyze_goodness(
             analysis["sentiment_hq"],
             "Woohoo! Let's go.",
+            "Emotion seems chill."
             "That seems a little negative.",
             "That seems pretty negative.")
         analyze_goodness(
             analysis["twitter_engagement"],
             "I suspect that this one'll be pretty popular.",
+            "This'll probably be somewhat popular.",
             "I'm not sure if this'll appeal to many people.",
             "I think this one will be unpopular.")
         political_bias = get_political_bias(analysis["political"])
