@@ -15,9 +15,11 @@ INDICOIO_API_KEY = "0115a1266812a351b9e80e72526916d9"
 
 tweeter = Tweeter(data['twitter'], INDICOIO_API_KEY)
 
+tts.speak("Ahria initializing.")
+
 def dispatch_command(text: str):
     if text.startswith('tweet'):
-        tweeter.tweet(text.lstrip())
+        tweeter.tweet(text.replace('tweet ', '', 1))
     elif text.__contains__('the weather'):
         m = re.search('(?:weather).+?([0-9]+)', text)
         weather.send_text(m.group(1), 'Boston, MA')
@@ -39,10 +41,6 @@ def dispatch_command(text: str):
         manager.manager_future(day, hour, minute, desc, phone_number)
     else:
         chatbot.enter_chatbot()
-
-
-
-
 
 hotword.listen_forever(dispatch_command)
 
