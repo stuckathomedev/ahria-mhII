@@ -1,4 +1,4 @@
-import snowboydecoder
+import cogs.hotword.snowboydecoder as snowboydecoder
 import speech_recognition as sr
 
 

@@ -1,13 +1,12 @@
 import json
 import re
 import cogs.voice.tts as tts
-import cogs.chatterbot.chatter as chatter
 import cogs.hotword.hotword as hotword
-import cogs.journal.journal as journal
+#import cogs.journal.journal as journal
 import cogs.weather.updated_weather as weather
 from cogs.tweeter.tweeter import Tweeter
-import cogs.task_manager.manager as manager
-import cogs.chatterbot.chatter as chatbot
+#import cogs.task_manager.manager as manager
+#import cogs.chatterbot.chatter as chatbot
 
 
 data = json.loads(open('data.json', 'r').read())
