@@ -1,9 +1,9 @@
-import cogs
 from datetime import datetime
 from threading import Timer
-from cogs.task_manager.sms_manager import send_text
+from twilio.rest import Client
 
 rem_desc = ""
+phone_number = ""
 
 def return_second_today(hour : int, minute: int):
     x = datetime.today()
@@ -25,13 +25,30 @@ def notification_timer(seconds : int):
 def times_up():
     print("You have an event soon!: " + rem_desc)
 
+def send_text():
 
-def manager_today(hour : int, minute : int, desc : str):
+    global rem_desc
+    notification = "The recent notification: " + rem_desc
+
+    global phone_number
+
+    account_sid = "AC984fee9fe6cc06c84923b4466a0c99a6"
+    auth_token = "f107dd35e35b59857bbe03917ee1f83e"
+    client = Client(account_sid, auth_token)
+
+    message = client.api.account.messages.create(to="+1" + phone_number,
+                                                 from_="+19788493104 ",
+                                                 body= notification)
+
+
+def manager_today(hour : int, minute : int, desc : str, phone_num : str):
     total_seconds = return_second_today(hour, minute)
     global rem_desc
     rem_desc = desc
+    global phone_number
+    phone_number = phone_num
     manager_timer(total_seconds)
     notification_timer(total_seconds)
 
 
-manager_today(3, 43, "Kill Kunal")
+manager_today(4, 18, "Kill Kunal", "9788448697")
