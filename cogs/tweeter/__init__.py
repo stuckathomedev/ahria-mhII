@@ -4,7 +4,7 @@ import indicoio
 import tweepy
 
 
-def analyze_goodness(
+def print_goodness_message(
         value,
         double_plus_good_text, good_text,
         ungood_text, double_plus_ungood_text):
@@ -67,13 +67,16 @@ class Tweeter:
 
         print("Okay, let's take a look at the results.")
 
-        analyze_goodness(
+        print_goodness_message(
             analysis["sentiment_hq"],
             "Nice positivity!",
             "Emotion seems chill."
             "That seems a little negative.",
             "That seems pretty negative.")
-        analyze_goodness(
+        if analysis["sentiment_hq"] <= 0.2:
+            print("Hey, do you want to talk about this?")
+
+        print_goodness_message(
             analysis["twitter_engagement"],
             "I suspect that this tweet'll be pretty popular.",
             "This'll probably be somewhat popular.",
