@@ -1,3 +1,2 @@
 import cogs
-import pyaudio
-import pocketsphinx
+import speech_recognition as sr
