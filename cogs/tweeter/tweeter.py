@@ -9,7 +9,7 @@ def print_goodness_message(
         double_plus_good_text, good_text,
         ungood_text, double_plus_ungood_text):
     if value >= 0.8:
-        # FIXME: Use a tts-synthesis function
+        # FIXME: Use a voice-synthesis function
         print(double_plus_good_text)
     elif 0.8 > value >= 0.4:
         print(good_text)

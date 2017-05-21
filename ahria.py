@@ -1,6 +1,6 @@
 import json
 
-import cogs.tts.tts as tts
+import cogs.voice.tts as tts
 import cogs.chatterbot.chatter as chatter
 import cogs.hotword.hotword as hotword
 import cogs.journal.journal as journal
