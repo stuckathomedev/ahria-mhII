@@ -38,7 +38,6 @@ def parse_weather(temp):
 
 
 def send_text(phone_number, place):
-    place = "Boston, MA"
     weather_dict = get_weather(place)
     cur_temp, max_temp, min_temp = parse_weather(weather_dict)
 
@@ -50,7 +49,7 @@ def send_text(phone_number, place):
     client = Client(account_sid, auth_token)
 
     message = client.api.account.messages.create(to="+1" + phone_number,
-                                                 from_="+19788493104 ",
+                                                 from_="+19788493104",
                                                  body=weather_body)
     tts.speak("Message sent.")
 
