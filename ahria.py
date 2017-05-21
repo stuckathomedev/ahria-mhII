@@ -19,6 +19,8 @@ tts.speak("Ahria initializing.")
 
 
 def dispatch_command(text: str):
+    print("Your response: " + text)
+
     if text.startswith('tweet'):
         tweeter.tweet(text.replace('tweet ', '', 1))
     elif "weather" in text:
