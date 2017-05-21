@@ -7,12 +7,12 @@ from pygame import mixer
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 
-def tts_set(message : str, language : str):
+def tts_set(message: str, language : str):
     tts = gTTS(text=message, lang=language)
     return tts
 
 
-def tts_save(tts, file_name : str):
+def tts_save(tts, file_name: str):
     tts.save(dir_path + "/" + file_name + ".mp3")
 
 
