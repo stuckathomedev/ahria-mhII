@@ -4,6 +4,7 @@ import speech_recognition as sr
 
 def listen_forever(text_callback):
     r = sr.Recognizer()
+    r.pause_threshold = 0.3
     detector = snowboydecoder.HotwordDetector(
         "resources/Ahria.pmdl", sensitivity=0.75)
 
@@ -16,9 +17,9 @@ def listen_forever(text_callback):
             try:
                 text_callback(r.recognize_google(audio))
             except sr.UnknownValueError:
-                print("Sphinx could not understand audio")
+                print("Ahria could not understand audio")
             except sr.RequestError as e:
-                print("Sphinx error; {0}".format(e))
+                print("Ahria error; {0}".format(e))
 
         detector = snowboydecoder.HotwordDetector(
             "resources/Ahria.pmdl", sensitivity=0.75)
