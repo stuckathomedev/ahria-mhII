@@ -24,6 +24,10 @@ def get_weather(place):
 
         print(date, status, temps)
 
+    return temp
+
+
+
 def send_text(phone_number,place):
 
     api_key = '4becd4f5bd426b1adc8d23b8496d7d00'
@@ -33,6 +37,7 @@ def send_text(phone_number,place):
     observation = owm.weather_at_place(place)
 
     temp = observation.get_weather().get_temperature('fahrenheit')
+
 
 
     account_sid = "AC984fee9fe6cc06c84923b4466a0c99a6"
@@ -45,6 +50,12 @@ def send_text(phone_number,place):
 
 get_weather("Boston, MA")
 
+def parse_weather(temp):
+    cur_temp = temp['temp']
+    max_temp = temp['temp_max']
+    min_temp = temp['temp_min']
+
+    return cur_temp, max_temp, min_temp
 
 
 
