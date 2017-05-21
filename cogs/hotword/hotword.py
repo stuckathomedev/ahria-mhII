@@ -4,16 +4,17 @@ import speech_recognition as sr
 
 def listen_forever(text_callback):
     r = sr.Recognizer()
-    r.pause_threshold = 0.3
+    r.pause_threshold = 0.7
     detector = snowboydecoder.HotwordDetector(
-        "resources/Ahria.pmdl", sensitivity=0.75)
+        "resources/Ahria.pmdl", sensitivity=0.5)
 
     def callback():
         nonlocal detector
         detector.terminate()
-        print("Heard ahria")
+        print("Hi! I'm ahria.")
         with sr.Microphone() as source:
             audio = r.listen(source, timeout=5.0)
+            print("Recognizing audio...")
             try:
                 text_callback(r.recognize_google(audio))
             except sr.UnknownValueError:
