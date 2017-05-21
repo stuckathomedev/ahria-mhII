@@ -10,7 +10,7 @@ def listen_forever(text_callback):
         "resources/Ahria.pmdl", sensitivity=0.75)
 
     def callback():
-        global detector
+        nonlocal detector
         detector.terminate()
         print("Heard ahria")
         with sr.Microphone() as source:
