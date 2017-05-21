@@ -20,13 +20,18 @@ tts.speak("Ahria initializing.")
 
 def dispatch_command(text: str):
     print("Your response: " + text)
+    text = text.lower()
 
     if text.startswith('tweet'):
         tweeter.tweet(text.replace('tweet ', '', 1))
     elif "weather" in text:
         m = re.search('(?:weather).+?([0-9]+)', text)
         weather.send_text(m.group(1), 'Boston, MA')
-
+    elif text == "quit":
+        tts.speak("Goodbye!")
+        exit()
+    else
+        tts.speak("Sorry, I didn't understand that.")
     # elif "reminder" in text and "today" in text:
     #     m = re.search(r'([0-9])\w* for (.*)', text)
     #     desc = m.group(2)
