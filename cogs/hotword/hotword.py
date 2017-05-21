@@ -15,7 +15,7 @@ with sr.Microphone() as source:
 
     def callback():
         detector.terminate()
-        r.listen(source)
+        audio = r.listen(source)
         try:
             print(r.recognize_sphinx(audio))
         except sr.UnknownValueError:
