@@ -27,8 +27,7 @@ def listen_forever(text_callback):
                 print("Sphinx could not understand audio")
             except sr.RequestError as e:
                 print("Sphinx error; {0}".format(e))
-            finally:
-                listening = False
+        listening = False
 
     detector.start(detected_callback=callback, sleep_time=0.03)
     # blocks?
