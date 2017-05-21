@@ -1,15 +1,16 @@
-import pocketsphinx
 import speech_recognition as sr
 
-r = sr.Recognizer()
-r.dynamic_energy_threshold = False
-with sr.Microphone() as source:
-    print("Say something!")
-    audio = r.listen(source, timeout=5.0)
 
-try:
-    print("Sphinx thinks you said: " + r.recognize_sphinx(audio))
-except sr.UnknownValueError:
-    print("Sphinx could not understand audio")
-except sr.RequestError as e:
-    print("Sphinx error; {0}".format(e))
+def stt_sphinx():
+    r = sr.Recognizer()
+    r.dynamic_energy_threshold = False
+    with sr.Microphone() as source:
+        print("Say something!")
+        audio = r.listen(source, timeout=5.0)
+
+    try:
+        print(r.recognize_sphinx(audio))
+    except sr.UnknownValueError:
+        print("Sphinx could not understand audio")
+    except sr.RequestError as e:
+        print("Sphinx error; {0}".format(e))
