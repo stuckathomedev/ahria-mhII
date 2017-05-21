@@ -15,7 +15,7 @@ def analyze_goodness(
         print(good_text)
     elif 0.4 > value >= 0.2:
         print(ungood_text)
-    elif 0.2 > value > 0:
+    elif 0.2 > value >= 0:
         print(double_plus_ungood_text)
     else:
         raise ValueError(
@@ -60,21 +60,22 @@ class Tweeter:
             print("Sorry, but your tweet is more than 140 characters. Try a shorter one.")
             return
 
+        print("Analyzing text...")
         analysis = indicoio.analyze_text(
             text,
             apis=['sentiment_hq', 'political', 'twitter_engagement'])
 
-        print(analysis)
+        print("Okay, let's take a look at the results.")
 
         analyze_goodness(
             analysis["sentiment_hq"],
-            "Woohoo! Let's go.",
+            "Nice positivity!",
             "Emotion seems chill."
             "That seems a little negative.",
             "That seems pretty negative.")
         analyze_goodness(
             analysis["twitter_engagement"],
-            "I suspect that this one'll be pretty popular.",
+            "I suspect that this tweet'll be pretty popular.",
             "This'll probably be somewhat popular.",
             "I'm not sure if this'll appeal to many people.",
             "I think this one will be unpopular.")
@@ -83,6 +84,7 @@ class Tweeter:
             print(f"Seems that your tweet has a high {political_bias[0]} bias.")
 
         print("Do you want to revise?")
+        # TODO: Implement revision
         if False:
             return False
         else:
