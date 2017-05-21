@@ -68,7 +68,7 @@ class Tweeter:
         print_goodness_message(
             analysis["sentiment_hq"],
             "Nice positivity!",
-            "Emotion seems chill."
+            "Emotion seems chill.",
             "That seems a little negative.",
             "That seems pretty negative.")
         if analysis["sentiment_hq"] <= 0.2:
