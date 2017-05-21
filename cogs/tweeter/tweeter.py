@@ -24,19 +24,16 @@ def print_goodness_message(
 
 
 def get_political_bias(biases):
-    for party, percentage in biases.items():
-        print(f"{party}: {percentage}")
     ranked_biases = sorted(biases.items(), key=operator.itemgetter(1), reverse=True)
     # [0]: first tuple in sorted list (with highest percentage)
     highest_bias = ranked_biases[0]
-    print(f"Highest bias: {highest_bias}")
     return highest_bias
 
 
 def length_ok(text):
     if len(text) > 140:
-        print("Sorry, your tweet is too long: it's "
-              f"{len(text)} characters. Can you make it shorter?")
+        print("Sorry, your tweet is too long: it's " +
+              "{} characters. Can you make it shorter?".format(len(text)))
         return False
     else:
         return True
@@ -85,7 +82,7 @@ class Tweeter:
             "I think this one will be unpopular.")
         political_bias = get_political_bias(analysis["political"])
         if political_bias[1] >= 0.40:
-            tts.speak(f"Seems that your tweet has a high {political_bias[0]} bias.")
+            tts.speak("Seems that your tweet has a high {} bias.".format(political_bias[0]))
 
         #tts.speak("Do you want to revise?")
         # TODO: Implement revision

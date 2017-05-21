@@ -16,6 +16,7 @@ tweeter = Tweeter(data['twitter'], INDICOIO_API_KEY)
 
 tts.speak("Ahria initializing.")
 
+
 def dispatch_command(text: str):
     if text.startswith('tweet'):
         tweeter.tweet(text.replace('tweet ', '', 1))
