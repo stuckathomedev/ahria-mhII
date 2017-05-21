@@ -3,7 +3,6 @@ appdirs==1.4.3
 Babel==2.4.0
 ChatterBot==0.6.0
 chatterbot-corpus==0.0.1
-Cogs==0.4.1
 colorama==0.3.9
 docutils==0.13.1
 Faker==0.7.3

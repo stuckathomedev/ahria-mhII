@@ -1,3 +1,5 @@
+import os
+
 import pygame
 from gtts import gTTS
 import os
@@ -21,7 +23,7 @@ def tts_error():
     tts_save(error_tts, 'error')
 
     mixer.init()
-    mixer.music.load(dir_path + "\error.mp3")
+    mixer.music.load(os.path.join(dir_path, "error.mp3"))
     mixer.music.play()
 
 
