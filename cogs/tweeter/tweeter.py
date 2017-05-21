@@ -84,8 +84,6 @@ class Tweeter:
         if political_bias[1] >= 0.40:
             tts.speak("Seems that your tweet has a high {} bias.".format(political_bias[0]))
 
-        #tts.speak("Do you want to revise?")
-        # TODO: Implement revision
         if False:
             return False
         else:

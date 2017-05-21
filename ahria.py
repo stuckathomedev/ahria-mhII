@@ -1,6 +1,8 @@
 import json
+from datetime import datetime
 import re
 
+import parsedatetime as pdt
 import cogs.voice.tts as tts
 import cogs.hotword.hotword as hotword
 #import cogs.journal.journal as journal
@@ -25,7 +27,8 @@ def dispatch_command(text: str):
     if text.startswith('tweet'):
         tweeter.tweet(text.replace('tweet ', '', 1))
     elif "weather" in text:
-        m = re.search('(?:weather).+?\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})', text)
+        # weather ... [phone number]
+        m = re.search(r"(?:weather).+?\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})", text)
         if m is not None:
             weather.send_text(m.group(1) + m.group(2) + m.group(3), 'Boston, MA')
         else:
@@ -33,15 +36,24 @@ def dispatch_command(text: str):
     elif text == "quit":
         tts.speak("Goodbye!")
         exit()
+    elif "reminder" in text and "today" in text:
+        desc_search = re.search(r"to ([A-Za-z0-9 ]+?)(?:for|at)", text)
+        number_search = re.search(r"at (?:\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4}))(?:for|at|)", text)
+        time_search = re.search(r"(?:at|on) ([APM :0-9]+)(?: |$)", text)
+
+        if desc_search is not None and number_search is not None and time_search is not None:
+            desc = desc_search.group(1)
+            phone_number = number_search.group(1) + number_search.group(2) + number_search.group(3)
+            human_time = time_search.group(1)
+
+            cal = pdt.Calendar()
+            time_struct, parse_status = cal.parse(human_time)
+            dt = datetime(*time_struct[:6])
+            manager.manager_today(dt.hour, dt.minute, desc, phone_number)
+        else:
+            tts.speak("Sorry, I didn't get that.")
     else:
         tts.speak("Sorry, I didn't understand that.")
-    # elif "reminder" in text and "today" in text:
-    #     m = re.search(r'([0-9])\w* for (.*)', text)
-    #     desc = m.group(2)
-    #     phone_number = m.group(3)
-    #     hour = m[0:2]
-    #     minute = m[2:4]
-    #     manager.manager_today(hour, minute, desc, phone_number)
     # elif "reminder" in text and "tomorrow" in text:
     #     m = re.search('([0-9])\w* for (.*?)', text)
     #     desc = m.group(2)
